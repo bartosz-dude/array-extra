@@ -1,8 +1,4 @@
 type InnerArray<T extends Array<unknown>> = T[number][]
-// type FlatArrayExtra<Arr extends ArrayExtra<unknown[]>, Depth extends number> = {
-//     done: Arr;
-//     recur: Arr extends ArrayExtra<Array<infer I>> ? FlatArrayExtra<InnerArr, [-1, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20][Depth]> : Arr;
-// }[ Depth extends -1 ? "done" : "recur" ]
 
 export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	static of<T extends Array<unknown>>(...items: T) {
@@ -78,48 +74,6 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 		return ArrayExtra.of(...super.map(callbackfn, thisArg))
 	}
 
-	// // @ts-expect-error
-	// reduce<U>(
-	// 	callbackfn: (
-	// 		previousValue: U,
-	// 		currentValue: T[number],
-	// 		currentIndex: number,
-	// 		array: InnerArray<T>
-	// 	) => U,
-	// 	initialValue: U
-	// ): U extends unknown[] ? ArrayExtra<U> : U {
-	// 	const red = super.reduce(callbackfn, initialValue)
-
-	// 	if (Array.isArray(red)) {
-	// 		// @ts-expect-error
-	// 		return ArrayExtra.from(red)
-	// 	}
-
-	// 	// @ts-expect-error
-	// 	return red
-	// }
-
-	// // @ts-expect-error
-	// reduceRight<U>(
-	// 	callbackfn: (
-	// 		previousValue: U,
-	// 		currentValue: T[number],
-	// 		currentIndex: number,
-	// 		array: InnerArray<T>
-	// 	) => U,
-	// 	initialValue: U
-	// ): U extends unknown[] ? ArrayExtra<U> : U {
-	// 	const red = super.reduceRight(callbackfn, initialValue)
-
-	// 	if (Array.isArray(red)) {
-	// 		// @ts-expect-error
-	// 		return ArrayExtra.from(red)
-	// 	}
-
-	// 	// @ts-expect-error
-	// 	return red
-	// }
-
 	reverse(): ArrayExtra<T> {
 		super.reverse()
 		return this
@@ -172,14 +126,6 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	with(index: number, value: T[number]): ArrayExtra<InnerArray<T>> {
 		return ArrayExtra.from(super.with(index, value))
 	}
-
-	// flat<A, D extends number = 1>(
-	// 	this: A,
-	// 	depth?: D | undefined
-	// ): ArrayExtra<FlatArray<A, D>[]> {
-	// 	// @ts-expect-error
-	// 	return ArrayExtra.from(super.flat(depth))
-	// }
 
 	/**
 	 * Copies an array, then removes the value at the provided index. If the index is negative, then it removes from the end of the array. If index is beyound the array, then returns just a copy of the array.
@@ -265,12 +211,20 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 		return arr
 	}
 
+	/**
+	 * Copies an array, then removes the first element from an array. If the array is empty, a copy of an array is returned.
+	 * @returns The coppied array with first element removed
+	 */
 	toShifted() {
 		const arr = this.concat()
 		arr.shift()
 		return arr
 	}
 
+	/**
+	 * Copies an array, then removes the last element from an array. If the array is empty, a copy of an array is returned.
+	 * @returns The coppied array with last element removed
+	 */
 	toPoped() {
 		const arr = this.concat()
 		arr.pop()
