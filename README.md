@@ -1,4 +1,4 @@
-# array-extra
+# array-extra-utils
 
 A mostly drop in replacement for an array with extra features.
 

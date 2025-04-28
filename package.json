@@ -1,5 +1,5 @@
 {
-	"name": "array-extra",
+	"name": "array-extra-utils",
 	"version": "1.0.0",
 	"author": "Bartosz Dudziński",
 	"description": "A mostly drop in replacement for an array with extra features",
@@ -8,14 +8,18 @@
 	],
 	"repository": {
 		"type": "github",
-		"url": "https://github.com/bartosz-dude/array-extra"
+		"url": "https://github.com/bartosz-dude/array-extra-utils"
 	},
-	"homepage": "https://github.com/bartosz-dude/array-extra",
+	"homepage": "https://github.com/bartosz-dude/array-extra-utils",
 	"funding": {
 		"type": "ko-fi",
 		"url": "https://ko-fi.com/bartoszdude"
 	},
-	"keywords": [],
+	"keywords": [
+		"array",
+		"extra methods",
+		"utils"
+	],
 	"module": "index.ts",
 	"type": "module",
 	"license": "MIT",
