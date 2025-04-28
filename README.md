@@ -76,12 +76,7 @@ arr.toPushedIndex()
 
 ## Known issues
 
-These methods have incorrect typing:
-
-- `flat`
-- `faltMap`
-
-Thse methods don't return `ArrayExtra`:
+These methods have incorrect typing and don't return `ArrayExtra` correctly:
 
 - `reduce`
 - `reduceRight`
