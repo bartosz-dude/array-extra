@@ -74,6 +74,12 @@ Returns a copy of the array with effect of `.push()`, but after the provided ind
 arr.toPushedIndex()
 ```
 
+Normalizes by converting negative index to positive index and checking if it's in array bounds
+
+```typescript
+arr.normalizeIndex()
+```
+
 ## Known issues
 
 These methods have incorrect typing and don't return `ArrayExtra` correctly:

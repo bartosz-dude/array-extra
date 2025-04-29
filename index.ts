@@ -28,7 +28,12 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 		return ArrayExtra.of(...(await super.fromAsync(arrayLike)))
 	}
 
-	#normalizeIndex(index: number): number | undefined {
+	/**
+	 * Parses negative index going from the end of the array to positve index going from start of the array, if index lands beyond the bounds of array this method returns `undefined`
+	 * @param index index to normalize
+	 * @returns normalized index
+	 */
+	normalizeIndex(index: number): number | undefined {
 		if (this.length - 1 < index) {
 			return undefined
 		}
@@ -128,12 +133,12 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	}
 
 	/**
-	 * Copies an array, then removes the value at the provided index. If the index is negative, then it removes from the end of the array. If index is beyound the array, then returns just a copy of the array.
+	 * Copies an array, then removes the value at the provided index. If the index is negative, then it removes from the end of the array. If index is beyond the array, then returns just a copy of the array.
 	 * @param index The index of the value to remove. If the index is negative, then it removes from the end of the array.
 	 * @returns The copied array with the removed value.
 	 */
 	without(index: number): ArrayExtra<InnerArray<T>> {
-		const i = this.#normalizeIndex(index)
+		const i = this.normalizeIndex(index)
 
 		if (i === undefined) {
 			return this.concat()
@@ -155,7 +160,7 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 		index: number,
 		...items: InnerArray<T>
 	): ArrayExtra<InnerArray<T>> {
-		const i = this.#normalizeIndex(index)
+		const i = this.normalizeIndex(index)
 
 		if (i === undefined) {
 			return this.concat()
@@ -180,7 +185,7 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 		index: number,
 		...items: InnerArray<T>
 	): ArrayExtra<InnerArray<T>> {
-		const i = this.#normalizeIndex(index)
+		const i = this.normalizeIndex(index)
 
 		if (i === undefined) {
 			return this.concat()
