@@ -1,6 +1,6 @@
 {
 	"name": "array-extra-utils",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"author": "Bartosz Dudziński",
 	"description": "A mostly drop in replacement for an array with extra features",
 	"files": [

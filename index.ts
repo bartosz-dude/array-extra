@@ -132,7 +132,7 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	 * @param index The index of the value to remove. If the index is negative, then it removes from the end of the array.
 	 * @returns The copied array with the removed value.
 	 */
-	without(index: number) {
+	without(index: number): ArrayExtra<InnerArray<T>> {
 		const i = this.#normalizeIndex(index)
 
 		if (i === undefined) {
@@ -151,11 +151,14 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	 * @param items Elements to insert before element at the provided index.
 	 * @returns The copied array with the inserted values.
 	 */
-	toUnshiftedIndex(index: number, ...items: InnerArray<T>) {
+	toUnshiftedIndex(
+		index: number,
+		...items: InnerArray<T>
+	): ArrayExtra<InnerArray<T>> {
 		const i = this.#normalizeIndex(index)
 
 		if (i === undefined) {
-			return
+			return this.concat()
 		}
 
 		if (i === 0) {
@@ -173,11 +176,14 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	 * @param items Elements to insert after element at the provided index.
 	 * @returns The copied array with the inserted values.
 	 */
-	toPushedIndex(index: number, ...items: InnerArray<T>) {
+	toPushedIndex(
+		index: number,
+		...items: InnerArray<T>
+	): ArrayExtra<InnerArray<T>> {
 		const i = this.#normalizeIndex(index)
 
 		if (i === undefined) {
-			return
+			return this.concat()
 		}
 
 		if (i === 0) {
@@ -194,7 +200,7 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	 * @param items Elements to insert at the start of the array.
 	 * @returns The copied array with the appended values.
 	 */
-	toUnshifted(...items: InnerArray<T>) {
+	toUnshifted(...items: InnerArray<T>): ArrayExtra<InnerArray<T>> {
 		const arr = this.concat()
 		arr.unshift(...items)
 		return arr
@@ -205,7 +211,7 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	 * @param items New elements to add to the array.
 	 * @returns The copied array with the appended values.
 	 */
-	toPushed(...items: InnerArray<T>) {
+	toPushed(...items: InnerArray<T>): ArrayExtra<InnerArray<T>> {
 		const arr = this.concat()
 		arr.push(...items)
 		return arr
@@ -215,7 +221,7 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	 * Copies an array, then removes the first element from an array. If the array is empty, a copy of an array is returned.
 	 * @returns The coppied array with first element removed
 	 */
-	toShifted() {
+	toShifted(): ArrayExtra<InnerArray<T>> {
 		const arr = this.concat()
 		arr.shift()
 		return arr
@@ -225,7 +231,7 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 	 * Copies an array, then removes the last element from an array. If the array is empty, a copy of an array is returned.
 	 * @returns The coppied array with last element removed
 	 */
-	toPoped() {
+	toPoped(): ArrayExtra<InnerArray<T>> {
 		const arr = this.concat()
 		arr.pop()
 		return arr
