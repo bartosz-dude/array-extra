@@ -168,6 +168,7 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 
 		if (i === 0) {
 			this.unshift(...items)
+			return this
 		}
 
 		const front = this.slice(0, i)
@@ -191,12 +192,13 @@ export class ArrayExtra<T extends Array<unknown>> extends Array<T[number]> {
 			return this.concat()
 		}
 
-		if (i === 0) {
-			this.unshift(...items)
+		if (i === this.length - 1) {
+			this.push(...items)
+			return this
 		}
 
-		const front = this.slice(0, i)
-		const end = this.slice(i)
+		const front = this.slice(0, i + 1)
+		const end = this.slice(i + 1)
 		return ArrayExtra.of(...front, ...items, ...end)
 	}
 
